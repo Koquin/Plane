@@ -1,8 +1,8 @@
 extends State
-class_name idle_facing_right_right_foot_front
+class_name idle_2
 
 func Enter():
-	parent.velocity.x += 40
+	pass
 	
 func Physics_update(delta: float) -> void:
 	pass
