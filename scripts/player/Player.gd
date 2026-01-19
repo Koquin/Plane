@@ -1,4 +1,4 @@
-class_name Character
+class_name Player
 extends CharacterBody2D
 
 var speed : float = 3.5
@@ -8,6 +8,7 @@ var is_facing_right : bool = true
 var acceleration : float = 1
 @onready var state_machine = $StateMachine
 var tileMap: TileMapLayer
+@onready var input = $PlayerInput
 
 func _ready():
 	# Inicia o personagem no IdleState
@@ -17,6 +18,7 @@ func set_tile_map(tm: TileMapLayer):
 	tileMap = tm
 	
 func _physics_process(delta):
+	input.update()
 	if not state_machine.is_in_state("HanggingState") and not state_machine.is_in_state("ClimbingLedgeState"):
 		velocity.y += gravity * delta
 	move_and_slide()
