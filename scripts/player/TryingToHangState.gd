@@ -4,7 +4,10 @@ extends State
 var cornerGrabPosition = Vector2.ZERO
 var ledgeGrabSnapPosition = Vector2.ZERO
 const ledgeGrabSnapY = 6
+@onready var character_animation: AnimationPlayer
 func Enter():
+	character_animation = parent.get_node("Sprite2D/AnimationPlayer")
+	character_animation.play("trying_to_hang")
 	parent.get_node("RayCastsHang/RayCast2DDireitoAlto").enabled = parent.is_facing_right
 	parent.get_node("RayCastsHang/RayCast2DEsquerdoAlto").enabled = not parent.is_facing_right
 	parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled = parent.is_facing_right
@@ -32,7 +35,7 @@ func Physics_update(_delta):
 		parent.get_node("Sprite2D/AnimationPlayer").play("falling")
 		
 	if parent.is_on_floor():
-		transitioned.emit("IdleState")
+		transitioned.emit("Idle")
 		return
 	
 	var raycast_dir_alto = parent.get_node("RayCastsHang/RayCast2DDireitoAlto")

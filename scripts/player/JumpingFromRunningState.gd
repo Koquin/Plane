@@ -1,6 +1,7 @@
 class_name JumpingFromRunningState
 extends State
 
+@onready var input := $"../../PlayerInput"
 func Enter():
 	parent.velocity.y = -180
 	if parent.velocity.x < 200 and parent.is_facing_right:
@@ -20,5 +21,5 @@ func Physics_update(delta: float):
 		transitioned.emit("FallingState")
 		return
 
-	if Input.is_action_just_pressed("jump") and not parent.is_on_floor():
+	if input.jump_just_pressed and not parent.is_on_floor():
 		transitioned.emit("TryingToHangState")

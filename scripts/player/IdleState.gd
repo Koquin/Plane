@@ -1,4 +1,4 @@
-class_name IdleState
+class_name Idle
 extends State
 
 func Enter():
@@ -13,7 +13,5 @@ func Physics_update(_delta):
 		parent.is_facing_right = false
 		transitioned.emit("RunningState")
 
-
-
 	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
-		transitioned.emit("PreparingToJumpFromIdleState")
+		transitioned.emit("PreparingToJumpFromIdle")
