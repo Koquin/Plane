@@ -1,8 +1,9 @@
 class_name RecoveringFromLowFallState
 extends State
+@onready var animator: AnimationPlayer = $"../../Sprite2D/AnimationPlayer"
 
 func Enter():
-	parent.get_node("Sprite2D/AnimationPlayer").play("recovering_from_low_fall")
+	animator.play("recovering_from_low_fall")
 
 	await get_tree().create_timer(0.2).timeout
 	transitioned.emit("Idle")

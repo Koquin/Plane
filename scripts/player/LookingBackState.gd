@@ -3,12 +3,11 @@ class_name looking_back_state
 
 @onready var animator : AnimationPlayer = $"../../Sprite2D/AnimationPlayer"
 @onready var input := $"../../PlayerInput"
-@onready var facing_right
+@onready var facing_right = $"../../../Player".is_facing_right
+@onready var flip = $"../../Sprite2D".flip_h
 
 func Enter():
 	facing_right = parent.is_facing_right
-	var flip = parent.get_node("Sprite2D").flip_h
-
 	animator.play("looking_back_while_hangging")
 	flip = not facing_right
 
