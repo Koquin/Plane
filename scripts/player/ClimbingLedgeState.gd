@@ -12,7 +12,7 @@ func Enter():
 	character_animator.play("climbing_ledge")
 	await get_tree().create_timer(0.3999).timeout
 	parent.global_position = climbingLedgeFinalPosition
-	transitioned.emit("IdleState")
+	transitioned.emit("Idle")
 
 func Physics_update(delta: float) -> void:
 	pass

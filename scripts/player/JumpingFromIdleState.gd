@@ -1,4 +1,4 @@
-class_name JumpingFromIdleState
+class_name JumpingFromIdle
 extends State
 
 func Enter():

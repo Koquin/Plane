@@ -11,14 +11,14 @@ var tileMap: TileMapLayer
 @onready var input = $PlayerInput
 
 func _ready():
-	# Inicia o personagem no IdleState
-	state_machine.on_child_transitioned("IdleState")
+	# Inicia o personagem no Idle
+	state_machine.on_child_transitioned("Idle")
 
 func set_tile_map(tm: TileMapLayer):
 	tileMap = tm
 	
 func _physics_process(delta):
 	input.update()
-	if not state_machine.is_in_state("HanggingState") and not state_machine.is_in_state("ClimbingLedgeState"):
+	if not state_machine.is_in_state("HanggingState") and not state_machine.is_in_state("ClimbingLedgeState") and not state_machine.is_in_state("LookingBackState"):
 		velocity.y += gravity * delta
 	move_and_slide()

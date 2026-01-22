@@ -1,4 +1,4 @@
-class_name PreparingToJumpFromIdleState
+class_name PreparingToJumpFromIdle
 extends State
 
 func Enter() -> void:
@@ -10,7 +10,7 @@ func Enter() -> void:
 		parent.get_node("Sprite2D").flip_h = true
 
 	await get_tree().create_timer(0.3).timeout
-	transitioned.emit("JumpingFromIdleState")
+	transitioned.emit("JumpingFromIdle")
 
 func Physics_update(delta: float) -> void:
 	pass

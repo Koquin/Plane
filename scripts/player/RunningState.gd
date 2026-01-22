@@ -7,7 +7,7 @@ func Physics_update(delta):
 	var direction := Input.get_axis("move_left", "move_right")
 
 	if direction == 0:
-		transitioned.emit("IdleState")
+		transitioned.emit("Idle")
 		return
 	
 	

@@ -5,11 +5,13 @@ extends Node
 var states: Dictionary = {}
 
 func _ready():
+	print("Chegou no state machine")
 	for child in get_children():
 		if child is State:
 			states[child.name] = child
 			child.transitioned.connect(on_child_transitioned)
 			child.parent = get_parent()
+			print("State achado ! State: %s" %child)
 		else:
 			push_warning("State machine contains child which is not 'State': %s" %child)
 
