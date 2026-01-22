@@ -1,20 +1,25 @@
 class_name JumpingFromIdle
 extends State
 
+@onready var animator : AnimationPlayer = $"../../Sprite2D/AnimationPlayer"
+@onready var input := $"../../PlayerInput"
+@onready var facing_right = $"../../../Player".is_facing_right
+@onready var flip = $"../../Sprite2D".flip_h
+
 func Enter():
 	parent.velocity.y = -200
 
 func Physics_update(delta: float):
-	parent.get_node("Sprite2D/AnimationPlayer").play("jumping_from_idle")
+	animator.play("jumping_from_idle")
 
-	if parent.is_facing_right:
-		parent.get_node("Sprite2D").flip_h = false
+	if facing_right:
+		flip = false
 	else:
-		parent.get_node("Sprite2D").flip_h = true
+		flip = true
 
 	if parent.velocity.y > 0:
 		transitioned.emit("FallingState")
 		return
 
-	if Input.is_action_just_pressed("jump") and not parent.is_on_floor():
+	if input.jump_just_pressed and not parent.is_on_floor():
 		transitioned.emit("TryingToHangState")

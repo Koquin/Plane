@@ -1,16 +1,19 @@
 class_name PreparingToJumpFromIdle
 extends State
 
+@onready var animator: AnimationPlayer = $"../../Sprite2D/AnimationPlayer"
+@onready var flip = $"../../Sprite2D".flip_h
+
 func Enter() -> void:
-	parent.get_node("Sprite2D/AnimationPlayer").play("preparing_to_jump_from_idle")
+	animator.play("preparing_to_jump_from_idle")
 
 	if parent.is_facing_right:
-		parent.get_node("Sprite2D").flip_h = false
+		flip = false
 	else:
-		parent.get_node("Sprite2D").flip_h = true
+		flip = true
 
 	await get_tree().create_timer(0.3).timeout
-	transitioned.emit("JumpingFromIdle")
+	transitioned.emit("JumpingFromIdleState")
 
 func Physics_update(delta: float) -> void:
 	pass

@@ -1,17 +1,22 @@
 class_name Idle
 extends State
 
+@onready var animator : AnimationPlayer = $"../../Sprite2D/AnimationPlayer"
+@onready var input := $"../../PlayerInput"
+@onready var facing_right = $"../../../Player".is_facing_right
+@onready var flip = $"../../Sprite2D".flip_h
+
 func Enter():
-	parent.get_node("Sprite2D/AnimationPlayer").play("idle")
+	animator.play("idle")
 	parent.velocity.x = 0
 func Physics_update(_delta):
-	var direction = Input.get_axis("move_left", "move_right")
+	var direction = input.move_axis
 	if direction > 0:
-		parent.is_facing_right = true
+		facing_right = true
 		transitioned.emit("RunningState")
 	elif direction < 0: 
-		parent.is_facing_right = false
+		facing_right = false
 		transitioned.emit("RunningState")
 
-	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
-		transitioned.emit("PreparingToJumpFromIdle")
+	if input.jump_just_pressed and parent.is_on_floor():
+		transitioned.emit("PreparingToJumpFromIdleState")

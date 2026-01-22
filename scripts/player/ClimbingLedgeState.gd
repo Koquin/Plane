@@ -10,7 +10,7 @@ func Enter():
 	var horizontal_direction = 1 if parent.is_facing_right else -1
 	climbingLedgeFinalPosition = parent.global_position + Vector2(10 * horizontal_direction, ledgeClimbPositionY)
 	character_animator.play("climbing_ledge")
-	await get_tree().create_timer(0.3999).timeout
+	await get_tree().create_timer(0.4).timeout
 	parent.global_position = climbingLedgeFinalPosition
 	transitioned.emit("Idle")
 
