@@ -1,5 +1,11 @@
 class_name Player
 extends CharacterBody2D
+@onready var sprite: Sprite2D = $Sprite2D
+
+func set_sprite(texture_path: String):
+	print("Textura mudada: %s" %texture_path)
+	sprite.texture = load(texture_path)
+
 const FALL_THRESHOLDS = {
 	"DANGEROUS": 900,
 	"EXTREME": 1200,
