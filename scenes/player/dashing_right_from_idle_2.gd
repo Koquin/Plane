@@ -10,7 +10,7 @@ class_name dashing_right_from_idle_3
 func Enter() -> void:
 	player.set_sprite("res://art/character/player_base_dashing.png")
 	animator.play("dashing/dashing_right_from_idle_2")
-	await get_tree().create_timer(0.1).timeout
+	await animator.animation_finished
 
 func Physics_update(delta: float) -> void:
 	if input.move_axis == 0:
