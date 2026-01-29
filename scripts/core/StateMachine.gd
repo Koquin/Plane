@@ -47,6 +47,6 @@ func _process_transition():
 
 	if current_state:
 		current_state.Exit()
-
+	print("Estado alterado: %s" %new_state)
 	new_state.Enter()
 	current_state = new_state

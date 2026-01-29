@@ -7,6 +7,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if (parent.is_facing_right):
-		position.x = 71
+		position.x = 40
 	else:
-		position.x = -70
+		position.x = -40

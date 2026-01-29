@@ -8,6 +8,7 @@ class_name idle_3
 @onready var player := $"../../../Player"
 
 func Enter():
+	super()
 	player.set_sprite("res://art/character/player_base_idle.png")
 	parent.velocity.x = 0
 	animator.play("idle/idle_3")
@@ -15,10 +16,10 @@ func Enter():
 
 func Physics_update(delta: float) -> void:
 	if (not parent.is_facing_right and input.move_axis == -1):
-		transitioned.emit("dashing_left_from_idle_3")
-	if (!parent.is_facing_right and input.move_axis == 1):
+		request_transition("dashing_left_from_idle_3")
+	elif (!parent.is_facing_right and input.move_axis == 1):
 		print("Tava virado para a esquerda e apertou o axis de valor 1")
 		parent.is_facing_right = true
-		transitioned.emit("idle_2")
-	if input.jump_just_pressed and parent.is_on_floor():
-		transitioned.emit("PreparingToJumpFromIdleState")
+		request_transition("turning_from_idle_3_to_idle_2")
+	elif input.jump_just_pressed and parent.is_on_floor():
+		request_transition("PreparingToJumpFromIdleState")

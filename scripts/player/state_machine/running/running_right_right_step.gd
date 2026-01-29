@@ -11,9 +11,8 @@ func Enter() -> void:
 	in_right_step = true
 	player.set_sprite("res://art/character/player_base_running.png")
 	animator.play("running/running_right_right_step")
-	parent.velocity.x = 100
-	await animator.animation_finished
-
+	parent.velocity.x = 140
+	
 func Physics_update(delta: float) -> void:
 	await get_tree().create_timer(0.2).timeout
 	super(delta)
