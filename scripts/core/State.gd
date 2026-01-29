@@ -19,15 +19,12 @@ func Update(delta: float) -> void:
 
 func Physics_update(delta: float) -> void:
 	time_in_state += delta
+	print(time_in_state)
 
 func request_transition(new_state: StringName):
-	print("Entrou no State agora. Pode pedir transicao ? %s" %can_request_transition)
-	print("Chegou no STATE com o estado: %s" %new_state)
 	if not can_request_transition:
-		print("Nao possivel pedir a transicao")
 		return
 	if time_in_state < min_time_in_state:
-		print("Tempo no estado e menor que tempo minimo no estado")
 		return
 
 	can_request_transition = false

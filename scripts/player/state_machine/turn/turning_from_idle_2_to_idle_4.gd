@@ -5,6 +5,7 @@ class_name turning_from_idle_2_to_4
 @onready var player := $"../../../Player"
 
 func Enter():
+	parent.is_facing_right = true
 	super()
 	player.set_sprite("res://art/character/player_base_turn.png")
 	animator.play("turn/turn_2_to_4")

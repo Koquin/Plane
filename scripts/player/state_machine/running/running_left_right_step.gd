@@ -19,7 +19,7 @@ func Physics_update(delta: float) -> void:
 
 	super(delta)
 	if (input.move_axis != -1):
-		request_transition("idle_3")
+		request_transition("jump_stop_left_back")
 		return
 	elif (input.move_axis == -1 and in_right_step):
 		in_right_step = false

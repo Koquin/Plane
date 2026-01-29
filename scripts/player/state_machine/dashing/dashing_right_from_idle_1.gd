@@ -8,6 +8,8 @@ class_name dashing_right_from_idle_1
 @onready var player := $"../../../Player"
 
 func Enter() -> void:
+	parent.is_facing_right = true
+
 	super()
 	player.set_sprite("res://art/character/player_base_dashing.png")
 	animator.play("dashing/dashing_right_from_idle_1")

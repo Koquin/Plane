@@ -17,7 +17,7 @@ func Physics_update(delta: float) -> void:
 	await get_tree().create_timer(0.2).timeout
 	super(delta)
 	if (input.move_axis != 1):
-		request_transition("idle_2")
+		request_transition("jump_stop_right_back")
 		return
 	elif (input.move_axis == 1 and in_left_step):
 		in_left_step = false

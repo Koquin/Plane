@@ -8,6 +8,7 @@ class_name idle_1
 @onready var player := $"../../../Player"
 
 func Enter():
+	parent.is_facing_right = true
 	super()
 	player.set_sprite("res://art/character/player_base_idle.png")
 	parent.velocity.x = 0
