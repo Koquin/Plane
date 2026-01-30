@@ -14,8 +14,8 @@ func Enter() -> void:
 
 func Physics_update(delta: float) -> void:
 	super(delta)
-	if (input.jump_just_pressed):
-		request_transition("jumping_from_jump_stop")
+	if (input.jump_just_pressed and time_in_state >= 0.2 and time_in_state <= maxJumpStopTime + 0.4):
+		request_transition("jumping_two_feet_left")
 		return
 	elif (input.move_axis == 1):
 		request_transition("dashing_right_from_idle_1")

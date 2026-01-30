@@ -20,4 +20,4 @@ func Physics_update(delta: float) -> void:
 		parent.is_facing_right = true
 		request_transition("turning_from_idle_4_to_idle_1")
 	elif input.jump_just_pressed and parent.is_on_floor():
-		request_transition("PreparingToJumpFromIdleState")
+		request_transition("jumping_two_feet_left_from_idle")

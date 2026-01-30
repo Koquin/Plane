@@ -15,7 +15,7 @@ func Enter() -> void:
 func Physics_update(delta: float) -> void:
 	super(delta)
 	if (input.jump_just_pressed):
-		request_transition("jumping_from_jump_stop")
+		request_transition("jumping_two_feet_left")
 		return
 	elif (input.move_axis == 1):
 		print("Mudando direcao")

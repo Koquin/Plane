@@ -19,7 +19,6 @@ func Update(delta: float) -> void:
 
 func Physics_update(delta: float) -> void:
 	time_in_state += delta
-	print(time_in_state)
 
 func request_transition(new_state: StringName):
 	if not can_request_transition:
