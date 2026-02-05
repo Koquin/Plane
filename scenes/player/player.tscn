@@ -684,6 +684,7 @@ _data = {
 }
 
 [sub_resource type="Animation" id="Animation_ahqnk"]
+length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -716,7 +717,7 @@ tracks/2/path = NodePath(".:region_rect:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6333333, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6333333, 0.93333334),
 "transitions": PackedFloat32Array(1e-05, 1.006703e-05, 1.006703e-05, 1.006703e-05),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(518, 0), Vector2(1036, 0), Vector2(1554, 0)]

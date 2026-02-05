@@ -10,7 +10,7 @@ func Enter() -> void:
 	super()
 	player.set_sprite("res://art/character/player_base_jump_stopping.png")
 	animator.play("jump_stop/jump_stop_left_front")
-	parent.velocity.x = 0
+	parent.velocity.x = -20
 
 func Physics_update(delta: float) -> void:
 	super(delta)

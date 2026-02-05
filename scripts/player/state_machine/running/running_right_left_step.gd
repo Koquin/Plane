@@ -11,15 +11,20 @@ func Enter() -> void:
 	in_left_step = true
 	player.set_sprite("res://art/character/player_base_running.png")
 	animator.play("running/running_right_left_step")
-	parent.velocity.x = 140
-
+	if parent.velocity.x < 50:
+		parent.velocity.x = 50
+	elif (parent.velocity.x >= 50 and parent.velocity.x < 200):
+		parent.velocity.x += 30
+	elif (parent.velocity.x >= 200):
+		parent.velocity.x += 15
+	elif (parent.velocity.x >= 240):
+		parent.velocity.x = 240
 func Physics_update(delta: float) -> void:
-	await get_tree().create_timer(0.2).timeout
 	super(delta)
 	if (input.move_axis != 1):
 		request_transition("jump_stop_right_back")
 		return
 	elif (input.move_axis == 1 and in_left_step):
+		await get_tree().create_timer(0.2).timeout
 		in_left_step = false
 		request_transition("running_right_right_step")
-		#transitioned.emit("jump_stop_left_front")
