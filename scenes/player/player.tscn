@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bfjj4j7xo0utd" path="res://scripts/player/Player.gd" id="1_x1sy7"]
 [ext_resource type="Script" uid="uid://demne7pukhv2c" path="res://scenes/player/camera2d.gd" id="2_kvlxm"]
-[ext_resource type="Texture2D" uid="uid://k02tnbvrkkb4" path="res://art/character/player_base_recovering_from_low_fall.png" id="3_kxw46"]
+[ext_resource type="Texture2D" uid="uid://byt5rrvi4jj7j" path="res://art/character/player_base_hangging.png" id="3_niom3"]
 [ext_resource type="Script" uid="uid://vfhdklamj5nm" path="res://scripts/core/StateMachine.gd" id="4_q6r6c"]
 [ext_resource type="Script" uid="uid://dimu2l7oy2a61" path="res://scripts/player/state_machine/dashing/dashing_right_from_idle_1.gd" id="5_j4nxn"]
 [ext_resource type="Script" uid="uid://dv0f4pbm3m38i" path="res://scripts/player/state_machine/idle/idle_1.gd" id="5_jx0ln"]
@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://buptolj7m0xe2" path="res://scripts/player/PreparingToJumpFromRunningState.gd" id="11_hqns4"]
 [ext_resource type="Script" uid="uid://buupieasalv7v" path="res://scripts/player/PreparingToJumpFromIdleState.gd" id="12_x0ka3"]
 [ext_resource type="Script" uid="uid://b6e0gxkocdvjk" path="res://scripts/player/state_machine/jumping_two_feet/jumping_two_feet_left.gd" id="13_0h7mo"]
-[ext_resource type="Script" uid="uid://0lkquio4qdcq" path="res://scripts/player/HanggingState.gd" id="14_d2bti"]
+[ext_resource type="Script" uid="uid://0lkquio4qdcq" path="res://scripts/player/state_machine/hang/hangging.gd" id="14_d2bti"]
 [ext_resource type="Script" uid="uid://coi0jsejqaxgj" path="res://scripts/player/JumpingFromRunningState.gd" id="14_nr8wp"]
 [ext_resource type="Script" uid="uid://bn60uu1tcgipv" path="res://scripts/player/JumpingFromHanggingState.gd" id="15_d2bti"]
 [ext_resource type="Script" uid="uid://bwaxbsn1chuwh" path="res://scripts/player/ClimbingLedgeState.gd" id="15_sm1rv"]
@@ -41,6 +41,8 @@
 [ext_resource type="Script" uid="uid://dvugdh4wnaymy" path="res://scripts/player/state_machine/fall/recovering_from_low_fall_left.gd" id="38_wva7c"]
 [ext_resource type="Script" uid="uid://yl84icncx06l" path="res://scripts/player/state_machine/jumping_two_feet/jumping_two_feet_left_from_idle.gd" id="39_vo27k"]
 [ext_resource type="Script" uid="uid://cjpco2f4hdeu0" path="res://scripts/player/state_machine/jumping_two_feet/jumping_two_feet_right_from_idle.gd" id="40_genst"]
+[ext_resource type="Script" uid="uid://bo4rrc7w8gqos" path="res://scripts/player/state_machine/started_hangging_left.gd" id="41_niom3"]
+[ext_resource type="Script" uid="uid://caath1c0770ci" path="res://scripts/player/state_machine/hang/started_hangging_right.gd" id="42_ttakn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d21ai"]
 size = Vector2(136.13, 101.59041)
@@ -165,35 +167,6 @@ tracks/0/keys = {
 "values": [Vector2i(0, 12), Vector2i(1, 12)]
 }
 
-[sub_resource type="Animation" id="Animation_rj586"]
-resource_name = "idle"
-length = 0.4
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.16666667, 0.33333334),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-
 [sub_resource type="Animation" id="Animation_fs4d3"]
 resource_name = "jumping_from_hangging"
 tracks/0/type = "value"
@@ -224,23 +197,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(2, 10)]
-}
-
-[sub_resource type="Animation" id="Animation_k73cj"]
-resource_name = "just_hangged"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6)]
 }
 
 [sub_resource type="Animation" id="Animation_rjqkl"]
@@ -292,54 +248,16 @@ tracks/0/keys = {
 "values": [Vector2i(0, 10), Vector2i(1, 10), Vector2i(2, 10)]
 }
 
-[sub_resource type="Animation" id="Animation_ta5nu"]
-resource_name = "recovering_from_low_fall"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2i(0, 9), Vector2i(1, 9)]
-}
-
-[sub_resource type="Animation" id="Animation_6cv16"]
-resource_name = "trying_to_hang"
-length = 0.7
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.4, 0.53333336),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 11), Vector2i(1, 11), Vector2i(2, 11), Vector2i(3, 11), Vector2i(4, 11)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ir8iy"]
 _data = {
 &"RESET": SubResource("Animation_j4nxn"),
 &"climbing_ledge": SubResource("Animation_sm1rv"),
 &"hangging": SubResource("Animation_flf07"),
-&"idle": SubResource("Animation_rj586"),
 &"jumping_from_hangging": SubResource("Animation_fs4d3"),
 &"jumping_from_running": SubResource("Animation_0h7mo"),
-&"just_hangged": SubResource("Animation_k73cj"),
 &"looking_back_while_hangging": SubResource("Animation_rjqkl"),
 &"preparing_to_jump_from_idle": SubResource("Animation_nr8wp"),
-&"preparing_to_jump_from_running": SubResource("Animation_hqns4"),
-&"recovering_from_low_fall": SubResource("Animation_ta5nu"),
-&"trying_to_hang": SubResource("Animation_6cv16")
+&"preparing_to_jump_from_running": SubResource("Animation_hqns4")
 }
 
 [sub_resource type="Animation" id="Animation_iqsei"]
@@ -763,6 +681,324 @@ _data = {
 &"low_falling_right": SubResource("Animation_rw8a5"),
 &"recovering_from_low_fall_left": SubResource("Animation_ttakn"),
 &"recovering_from_low_fall_right": SubResource("Animation_iwuka")
+}
+
+[sub_resource type="Animation" id="Animation_ahqnk"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:region_rect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6333333, 1),
+"transitions": PackedFloat32Array(1e-05, 1.006703e-05, 1.006703e-05, 1.006703e-05),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(518, 0), Vector2(1036, 0), Vector2(1554, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:region_rect:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(518, 518)]
+}
+
+[sub_resource type="Animation" id="Animation_vb1ce"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:region_rect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6333333, 1),
+"transitions": PackedFloat32Array(1e-05, 1.006703e-05, 1.006703e-05, 1.006703e-05),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(518, 0), Vector2(1036, 0), Vector2(1554, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:region_rect:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(518, 518)]
+}
+
+[sub_resource type="Animation" id="Animation_2t3bg"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:region_rect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2),
+"transitions": PackedFloat32Array(1e-05, 1.006703e-05, 1.006703e-05, 1.006703e-05),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(518, 0), Vector2(1036, 0), Vector2(1554, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:region_rect:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(518, 518)]
+}
+
+[sub_resource type="Animation" id="Animation_jrbya"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:region_rect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2),
+"transitions": PackedFloat32Array(1e-05, 1.006703e-05, 1.006703e-05, 1.006703e-05),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(518, 0), Vector2(1036, 0), Vector2(1554, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:region_rect:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(518, 518)]
+}
+
+[sub_resource type="Animation" id="Animation_ds1xl"]
+length = 0.6666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:region_rect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.43333334, 0.6666667),
+"transitions": PackedFloat32Array(1e-05, 1.006703e-05, 1.006703e-05, 1.006703e-05),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(518, 0), Vector2(1036, 0), Vector2(1554, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:region_rect:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(518, 518)]
+}
+
+[sub_resource type="Animation" id="Animation_1u1sw"]
+length = 0.666
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:region_rect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.43333334, 0.6666667),
+"transitions": PackedFloat32Array(1e-05, 1.006703e-05, 1.006703e-05, 1.006703e-05),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(518, 0), Vector2(1036, 0), Vector2(1554, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:region_rect:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(518, 518)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2t3bg"]
+_data = {
+&"hangging_left": SubResource("Animation_ahqnk"),
+&"hangging_right": SubResource("Animation_vb1ce"),
+&"started_hangging_left": SubResource("Animation_2t3bg"),
+&"started_hangging_right": SubResource("Animation_jrbya"),
+&"trying_to_hang_left": SubResource("Animation_ds1xl"),
+&"trying_to_hang_right": SubResource("Animation_1u1sw")
 }
 
 [sub_resource type="Animation" id="Animation_kvlxm"]
@@ -1799,28 +2035,28 @@ shape = SubResource("RectangleShape2D_d21ai")
 scale = Vector2(0.0237143, 0.301438)
 
 [node name="RayCast2DDireitoAlto" type="RayCast2D" parent="RayCastsHang" unique_id=1341551002]
-position = Vector2(0, -70)
+position = Vector2(0, -30)
 scale = Vector2(1.4, 1)
 target_position = Vector2(260, 0)
 
 [node name="RayCast2DEsquerdoAlto" type="RayCast2D" parent="RayCastsHang" unique_id=2124164748]
-position = Vector2(0, -70)
+position = Vector2(0, -30)
 scale = Vector2(1.4, 1)
 target_position = Vector2(-260, 0)
 
 [node name="RayCast2DDireitoAltoBaixo" type="RayCast2D" parent="RayCastsHang" unique_id=165039668]
-position = Vector2(0, -40)
+position = Vector2(0, -20)
 scale = Vector2(1.4, 1)
 target_position = Vector2(230, 0)
 
 [node name="RayCast2DEsquerdoAltoBaixo" type="RayCast2D" parent="RayCastsHang" unique_id=870949256]
-position = Vector2(0, -40)
+position = Vector2(0, -20)
 scale = Vector2(1.4, 1)
 target_position = Vector2(-230, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1275564916]
 scale = Vector2(0.04, 0.04)
-texture = ExtResource("3_kxw46")
+texture = ExtResource("3_niom3")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(0, 0, 518, 518)
@@ -1829,6 +2065,7 @@ region_rect = Rect2(0, 0, 518, 518)
 libraries/ = SubResource("AnimationLibrary_ir8iy")
 libraries/dashing = SubResource("AnimationLibrary_pk8ii")
 libraries/fall = SubResource("AnimationLibrary_rw8a5")
+libraries/hang = SubResource("AnimationLibrary_2t3bg")
 libraries/idle = SubResource("AnimationLibrary_3j4b4")
 libraries/jump = SubResource("AnimationLibrary_niom3")
 libraries/jump_stop = SubResource("AnimationLibrary_genst")
@@ -1871,7 +2108,7 @@ script = ExtResource("12_x0ka3")
 [node name="jumping_two_feet_left" type="Node" parent="StateMachine" unique_id=1333094183]
 script = ExtResource("13_0h7mo")
 
-[node name="HanggingState" type="Node" parent="StateMachine" unique_id=1985925079]
+[node name="hangging" type="Node" parent="StateMachine" unique_id=1985925079]
 script = ExtResource("14_d2bti")
 
 [node name="JumpingFromHanggingState" type="Node" parent="StateMachine" unique_id=1836782865]
@@ -1949,6 +2186,12 @@ script = ExtResource("39_vo27k")
 
 [node name="jumping_two_feet_right_from_idle" type="Node" parent="StateMachine" unique_id=1730520498]
 script = ExtResource("40_genst")
+
+[node name="started_hangging_left" type="Node" parent="StateMachine" unique_id=369428922]
+script = ExtResource("41_niom3")
+
+[node name="started_hangging_right" type="Node" parent="StateMachine" unique_id=1643792785]
+script = ExtResource("42_ttakn")
 
 [node name="PlayerInput" type="Node" parent="." unique_id=842070814]
 script = ExtResource("25_007i1")

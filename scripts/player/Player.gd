@@ -81,6 +81,6 @@ func set_tile_map(tm: TileMapLayer):
 	
 func _physics_process(delta):
 	input.update()
-	if not state_machine.is_in_state("HanggingState") and not state_machine.is_in_state("ClimbingLedgeState") and not state_machine.is_in_state("LookingBackState"):
+	if not state_machine.is_in_state("hangging") and not state_machine.is_in_state("climbing_ledge") and not state_machine.is_in_state("looking_back") and not state_machine.is_in_state("started_hangging_left") and not state_machine.is_in_state("started_hangging_right"):
 		velocity.y += gravity * delta
 	move_and_slide()
