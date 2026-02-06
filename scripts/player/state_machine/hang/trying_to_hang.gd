@@ -17,8 +17,8 @@ func Enter():
 	parent.get_node("RayCastsHang/RayCast2DEsquerdoAlto").enabled = not parent.is_facing_right
 	parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled = parent.is_facing_right
 	parent.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo").enabled = not parent.is_facing_right
-	print(parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled)
-	print(parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled)
+	print("Raycast direito alto: %s" %parent.get_node("RayCastsHang/RayCast2DDireitoAlto").enabled)
+	print("Raycast direito baixo: %s" %parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled)
 	
 func Physics_update(delta: float) -> void:
 	super(delta)
@@ -29,19 +29,6 @@ func Physics_update(delta: float) -> void:
 	var raycast_dir_alto_baixo = parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo")
 	var raycast_esq_alto_baixo = parent.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo")
 	
-	if parent.is_on_floor():
-		raycast_dir_alto_baixo.target_position.y = 0
-		raycast_esq_alto_baixo.target_position.y = 0
-		if parent.is_facing_right:
-			request_transition("recovering_from_low_fall_right")
-		else:
-			request_transition("recovering_from_low_fall_left")
-		return
-	
-	if parent.velocity.y > 500:
-		raycast_dir_alto_baixo.target_position.y = max(0, abs(parent.velocity.y) * delta * 2)
-		raycast_esq_alto_baixo.target_position.y = max(0, abs(parent.velocity.y) * delta * 2)
-
 	if (raycast_dir_alto_baixo.enabled and raycast_dir_alto_baixo.is_colliding() and raycast_dir_alto.enabled and not raycast_dir_alto.is_colliding()) \
 	or (raycast_esq_alto_baixo.enabled and raycast_esq_alto_baixo.is_colliding() and raycast_esq_alto.enabled and not raycast_esq_alto.is_colliding()):
 		raycast_dir_alto_baixo.target_position.y = 0
@@ -50,3 +37,17 @@ func Physics_update(delta: float) -> void:
 			request_transition("started_hangging_right")
 		else:
 			request_transition("started_hangging_left")
+
+	if parent.is_on_floor():
+		raycast_dir_alto_baixo.target_position.y = 0
+		raycast_esq_alto_baixo.target_position.y = 0
+		if parent.is_facing_right:
+			request_transition("recovering_from_low_fall_right")
+			print("Recuperando da queda direita")
+		else:
+			request_transition("recovering_from_low_fall_left")
+			print("Recuperando da queda esquerda")
+	
+	if parent.velocity.y > 500:
+		raycast_dir_alto_baixo.target_position.y = max(0, abs(parent.velocity.y) * delta * 2)
+		raycast_esq_alto_baixo.target_position.y = max(0, abs(parent.velocity.y) * delta * 2)

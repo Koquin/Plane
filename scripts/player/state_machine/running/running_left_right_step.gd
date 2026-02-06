@@ -22,7 +22,11 @@ func Enter() -> void:
 		
 func Physics_update(delta: float) -> void:
 	super(delta)
-	if (input.move_axis != -1):
+	if parent.velocity.y > 0:
+		request_transition("low_falling_left")
+	elif input.jump_just_pressed:
+		request_transition("jumping_one_feet_left_left_foot_front")
+	elif (input.move_axis != -1):
 		request_transition("jump_stop_left_back")
 		return
 	elif (input.move_axis == -1 and in_right_step):

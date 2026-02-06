@@ -14,6 +14,7 @@ const ledgeGrabSnapY = 2
 @onready var player := $"../../../Player"
 
 func Enter():
+	super()
 	player.set_sprite("res://art/character/player_base_hangging.png")
 
 	#Hangging animation
@@ -26,18 +27,27 @@ func Enter():
 	
 func Physics_update(delta: float) -> void:
 	super(delta)
-	if input.down_pressed:
-		if parent.is_facing_right:
-			request_transition("low_falling_right")
-		else: request_transition("low_falling_left")
-	
 	if input.up_pressed:
-		request_transition("ClimbingLedgeState")
+		if parent.is_facing_right:
+			request_transition("climbing_right")
+			return
+		else: 
+			request_transition("climbing_left")
+			return
+	elif input.down_pressed and parent.is_facing_right:
+		print("Caindo para a direita")
+		request_transition("low_falling_right")
+		return
+	elif input.down_pressed and not parent.is_facing_right: 
+		print("Caindo para a esquerda")
+		request_transition("low_falling_left")
 		return
 	#If the player presses left and is hangging on the right
-	if (input.move_axis == -1) and parent.is_facing_right:
-		transitioned.emit("LookingBackState")
-			
+	elif (input.move_axis == -1) and parent.is_facing_right:
+		print("Olhando para tras")
+		request_transition("looking_back_from_right")
 	#If the player presses right and is hangging on the left
 	elif (input.move_axis == 1) and not parent.is_facing_right:
-		transitioned.emit("LookingBackState")
+		print("OLhando para tras")
+		request_transition("looking_back_from_left")
+		

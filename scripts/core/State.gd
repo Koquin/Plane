@@ -1,15 +1,19 @@
 class_name State
 extends Node
+
+signal transitioned(new_state_name: StringName)
+
 @export var min_time_in_state := 0.0
 
 var time_in_state := 0.0
 var can_request_transition := true
-signal transitioned(new_state_name: StringName)
 var parent: CharacterBody2D
 
-func Enter() -> void:
-	time_in_state = 0.3
+func Enter():
+	print("Entrou no state, pode pedir transicao")
+	time_in_state = 0.0
 	can_request_transition = true
+
 
 func Exit() -> void:
 	pass
@@ -17,8 +21,9 @@ func Exit() -> void:
 func Update(delta: float) -> void:
 	pass
 
-func Physics_update(delta: float) -> void:
+func Physics_update(delta):
 	time_in_state += delta
+
 
 func request_transition(new_state: StringName):
 	if not can_request_transition:

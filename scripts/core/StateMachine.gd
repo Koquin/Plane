@@ -7,7 +7,6 @@ var transition_requested := false
 var next_state_name: StringName
 
 func _ready():
-	print("Chegou no state machine")
 	for child in get_children():
 		if child is State:
 			states[child.name] = child
@@ -34,6 +33,7 @@ func _physics_process(delta):
 		current_state.Physics_update(delta)
 
 func on_child_transitioned(new_state_name: StringName) -> void:
+	print("Chegou no state machine")
 	next_state_name = new_state_name
 	transition_requested = true
 	
