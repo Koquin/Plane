@@ -3,9 +3,10 @@ extends Node
 
 @export var current_state: State
 var states: Dictionary = {}
+var transition_requested := false
+var next_state_name: StringName
 
 func _ready():
-	print("Chegou no state machine")
 	for child in get_children():
 		if child is State:
 			states[child.name] = child
@@ -25,18 +26,27 @@ func _process(delta):
 		current_state.Update(delta)
 
 func _physics_process(delta):
+	if transition_requested:
+		_process_transition()
+		transition_requested = false
 	if current_state != null:
 		current_state.Physics_update(delta)
 
 func on_child_transitioned(new_state_name: StringName) -> void:
-	var new_state: State = states.get(new_state_name)
-	if new_state != null and new_state != current_state:
-		if current_state != null:
-			current_state.Exit()
-		new_state.Enter()
-		current_state = new_state
-		print("[State changed ! New State: %s]" %new_state_name)
-	else:
-		push_warning("Called transition on a state that does not exist: %s" % new_state_name)
+	print("Chegou no state machine")
+	next_state_name = new_state_name
+	transition_requested = true
+	
 func is_in_state(state_name: String) -> bool:
 	return current_state != null and current_state.name == state_name
+	
+func _process_transition():
+	var new_state: State = states.get(next_state_name)
+	if new_state == null or new_state == current_state:
+		return
+
+	if current_state:
+		current_state.Exit()
+	print("Estado alterado: %s" %new_state)
+	new_state.Enter()
+	current_state = new_state
