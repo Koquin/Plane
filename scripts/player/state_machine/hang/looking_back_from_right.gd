@@ -20,4 +20,4 @@ func Physics_update(delta: float) -> void:
 		request_transition("started_hangging_right")
 	if input.jump_just_pressed:
 		parent.is_facing_right = not facing_right
-		request_transition("jumping_one_feet_left")
+		request_transition("jumping_one_foot_left_from_left_foot")

@@ -27,6 +27,8 @@ func Physics_update(delta: float) -> void:
 	elif (input.move_axis != -1):
 		request_transition("jump_stop_left_front")
 		return
+	elif (input.jump_just_pressed):
+		request_transition("jumping_one_foot_left_from_left_foot")
 	elif (input.move_axis == -1 and in_left_step):
 		await get_tree().create_timer(0.2).timeout
 		in_left_step = false

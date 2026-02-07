@@ -1,5 +1,5 @@
 extends State
-class_name jumping_one_feet_left
+class_name jumping_one_foot_left_from_left_foot
 
 @onready var animator := $"../../Sprite2D/AnimationPlayer"
 @onready var input := $"../../PlayerInput"
@@ -8,9 +8,13 @@ class_name jumping_one_feet_left
 
 func Enter() -> void:
 	super()
-	player.set_sprite("res://art/character/player_base_jumping_one_feet.png")
-	animator.play("jump/jumping_one_feet_left")
-	parent.velocity.y = -180
+	player.set_sprite("res://art/character/player_base_jumping_one_foot.png")
+	animator.play("jump/jumping_one_foot_left_from_left_foot")
+	if (parent.is_on_floor()):
+		parent.velocity.y = -170
+	else:
+		parent.velocity.y = -130
+		parent.velocity.x = -130
 	
 func Physics_update(delta: float) -> void:
 	super(delta)
@@ -18,4 +22,4 @@ func Physics_update(delta: float) -> void:
 		request_transition("trying_to_hang")
 		return
 	elif (parent.velocity.y > 0):
-		request_transition("low_falling_right")
+		request_transition("low_falling_left")

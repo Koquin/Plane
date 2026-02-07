@@ -24,8 +24,8 @@ func Physics_update(delta: float) -> void:
 	super(delta)
 	if parent.velocity.y > 0:
 		request_transition("low_falling_left")
-	elif input.jump_just_pressed:
-		request_transition("jumping_one_feet_left_left_foot_front")
+	elif (input.jump_just_pressed):
+		request_transition("jumping_one_foot_left_from_right_foot")
 	elif (input.move_axis != -1):
 		request_transition("jump_stop_left_back")
 		return
