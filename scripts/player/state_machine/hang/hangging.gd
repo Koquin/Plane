@@ -2,15 +2,8 @@ class_name hangging
 extends State
 
 var is_looking_back := false
-var cornerGrabPosition = Vector2.ZERO
-var ledgeGrabSnapPosition = Vector2.ZERO
-const ledgeGrabSnapY = 2
 @onready var character_animation: AnimationPlayer = $"../../Sprite2D/AnimationPlayer"
 @onready var input := $"../../PlayerInput"
-@onready var ray_cast_dir_alto: RayCast2D = $"../../RayCastsHang/RayCast2DDireitoAlto"
-@onready var ray_cast_esq_alto: RayCast2D = $"../../RayCastsHang/RayCast2DEsquerdoAlto"
-@onready var ray_cast_dir_alto_baixo: RayCast2D = $"../../RayCastsHang/RayCast2DDireitoAltoBaixo"
-@onready var ray_cast_esq_alto_baixo: RayCast2D = $"../../RayCastsHang/RayCast2DEsquerdoAltoBaixo"
 @onready var player := $"../../../Player"
 
 func Enter():

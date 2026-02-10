@@ -6,6 +6,10 @@ extends State
 @onready var facing_right = $"../../../Player".is_facing_right
 @onready var flip = $"../../Sprite2D".flip_h
 @onready var player := $"../../../Player"
+@onready var raycast_dir_alto = player.get_node("RayCastsHang/RayCast2DDireitoAlto")
+@onready var raycast_esq_alto = player.get_node("RayCastsHang/RayCast2DEsquerdoAlto")
+@onready var raycast_dir_alto_baixo = player.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo")
+@onready var raycast_esq_alto_baixo = player.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo")
 
 func Enter():
 	super()
@@ -19,35 +23,37 @@ func Enter():
 	parent.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo").enabled = not parent.is_facing_right
 	print("Raycast direito alto: %s" %parent.get_node("RayCastsHang/RayCast2DDireitoAlto").enabled)
 	print("Raycast direito baixo: %s" %parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled)
-	
+
 func Physics_update(delta: float) -> void:
 	super(delta)
-	print("Velocidade de queda: %s" %parent.velocity.y)
-	var raycast_dir_alto = parent.get_node("RayCastsHang/RayCast2DDireitoAlto")
-	var raycast_esq_alto = parent.get_node("RayCastsHang/RayCast2DEsquerdoAlto")
-	
-	var raycast_dir_alto_baixo = parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo")
-	var raycast_esq_alto_baixo = parent.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo")
-	
-	if (raycast_dir_alto_baixo.enabled and raycast_dir_alto_baixo.is_colliding() and raycast_dir_alto.enabled and not raycast_dir_alto.is_colliding()) \
+	if ((raycast_dir_alto_baixo.enabled and raycast_dir_alto_baixo.is_colliding()) and (raycast_dir_alto.enabled and not raycast_dir_alto.is_colliding())) \
 	or (raycast_esq_alto_baixo.enabled and raycast_esq_alto_baixo.is_colliding() and raycast_esq_alto.enabled and not raycast_esq_alto.is_colliding()):
+		print("Raycast dir_alto_baixo colidindo ?: %s" %raycast_dir_alto_baixo.is_colliding())
+		print("Raycast dir_alto colidindo ?: %s" %raycast_dir_alto.is_colliding())
+		print("Raycast esq_alto_baixo colidindo ?: %s" %raycast_esq_alto_baixo.is_colliding())
+		print("Raycast esq_alto colidindo ?: %s" %raycast_esq_alto.is_colliding())
+
 		raycast_dir_alto_baixo.target_position.y = 0
 		raycast_esq_alto_baixo.target_position.y = 0
 		if parent.is_facing_right:
+			print("Indo para o hangging right")
 			request_transition("started_hangging_right")
 		else:
+			print("Indo para o hangging left")
 			request_transition("started_hangging_left")
 
-	if parent.is_on_floor():
-		raycast_dir_alto_baixo.target_position.y = 0
-		raycast_esq_alto_baixo.target_position.y = 0
+	elif parent.is_on_floor():
+		print("Recuperando da queda")
 		if parent.is_facing_right:
 			request_transition("recovering_from_low_fall_right")
-			print("Recuperando da queda direita")
 		else:
 			request_transition("recovering_from_low_fall_left")
-			print("Recuperando da queda esquerda")
 	
-	if parent.velocity.y > 500:
+	elif parent.velocity.y > 100:
 		raycast_dir_alto_baixo.target_position.y = max(0, abs(parent.velocity.y) * delta * 2)
 		raycast_esq_alto_baixo.target_position.y = max(0, abs(parent.velocity.y) * delta * 2)
+
+func Exit():
+	raycast_dir_alto_baixo.target_position.y = 0
+	raycast_esq_alto_baixo.target_position.y = 0
+	

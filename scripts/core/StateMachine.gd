@@ -12,7 +12,6 @@ func _ready():
 			states[child.name] = child
 			child.transitioned.connect(on_child_transitioned)
 			child.parent = get_parent()
-			print("State achado ! State: %s" %child)
 		else:
 			push_warning("State machine contains child which is not 'State': %s" %child)
 
@@ -33,7 +32,6 @@ func _physics_process(delta):
 		current_state.Physics_update(delta)
 
 func on_child_transitioned(new_state_name: StringName) -> void:
-	print("Chegou no state machine")
 	next_state_name = new_state_name
 	transition_requested = true
 	
@@ -47,6 +45,5 @@ func _process_transition():
 
 	if current_state:
 		current_state.Exit()
-	print("Estado alterado: %s" %new_state)
 	new_state.Enter()
 	current_state = new_state

@@ -2819,22 +2819,22 @@ scale = Vector2(0.0237143, 0.301438)
 [node name="RayCast2DDireitoAlto" type="RayCast2D" parent="RayCastsHang" unique_id=1341551002]
 position = Vector2(0, -30)
 scale = Vector2(1.4, 1)
-target_position = Vector2(260, 0)
+target_position = Vector2(220, 0)
 
 [node name="RayCast2DEsquerdoAlto" type="RayCast2D" parent="RayCastsHang" unique_id=2124164748]
 position = Vector2(0, -30)
 scale = Vector2(1.4, 1)
-target_position = Vector2(-260, 0)
+target_position = Vector2(-220, 0)
 
 [node name="RayCast2DDireitoAltoBaixo" type="RayCast2D" parent="RayCastsHang" unique_id=165039668]
 position = Vector2(0, -20)
 scale = Vector2(1.4, 1)
-target_position = Vector2(230, 0)
+target_position = Vector2(150, 0)
 
 [node name="RayCast2DEsquerdoAltoBaixo" type="RayCast2D" parent="RayCastsHang" unique_id=870949256]
 position = Vector2(0, -20)
 scale = Vector2(1.4, 1)
-target_position = Vector2(-230, 0)
+target_position = Vector2(-140, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1275564916]
 position = Vector2(0, -10)

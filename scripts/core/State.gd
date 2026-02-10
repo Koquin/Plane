@@ -10,7 +10,6 @@ var can_request_transition := true
 var parent: CharacterBody2D
 
 func Enter():
-	print("Entrou no state, pode pedir transicao")
 	time_in_state = 0.0
 	can_request_transition = true
 
