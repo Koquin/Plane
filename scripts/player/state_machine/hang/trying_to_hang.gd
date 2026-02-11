@@ -10,6 +10,8 @@ extends State
 @onready var raycast_esq_alto = player.get_node("RayCastsHang/RayCast2DEsquerdoAlto")
 @onready var raycast_dir_alto_baixo = player.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo")
 @onready var raycast_esq_alto_baixo = player.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo")
+@onready var raycast_esq_meio = player.get_node("RayCastsHang/RayCast2DEsquerdoMeio")
+@onready var raycast_dir_meio = player.get_node("RayCastsHang/RayCast2DDireitoMeio")
 
 func Enter():
 	super()
@@ -21,12 +23,28 @@ func Enter():
 	parent.get_node("RayCastsHang/RayCast2DEsquerdoAlto").enabled = not parent.is_facing_right
 	parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled = parent.is_facing_right
 	parent.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo").enabled = not parent.is_facing_right
+	parent.get_node("RayCastsHang/RayCast2DDireitoMeio").enabled = parent.is_facing_right
+	parent.get_node("RayCastsHang/RayCast2DEsquerdoMeio").enabled = not parent.is_facing_right
 	print("Raycast direito alto: %s" %parent.get_node("RayCastsHang/RayCast2DDireitoAlto").enabled)
 	print("Raycast direito baixo: %s" %parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled)
 
 func Physics_update(delta: float) -> void:
 	super(delta)
-	if ((raycast_dir_alto_baixo.enabled and raycast_dir_alto_baixo.is_colliding()) and (raycast_dir_alto.enabled and not raycast_dir_alto.is_colliding())) \
+	if ((raycast_dir_alto_baixo.enabled and not raycast_dir_alto_baixo.is_colliding()) and (raycast_dir_meio.enabled and raycast_dir_meio.is_colliding())) \
+	or (raycast_esq_alto_baixo.enabled and not raycast_esq_alto_baixo.is_colliding() and raycast_esq_meio.enabled and raycast_esq_meio.is_colliding()):
+		print("Raycast dir meio colidindo ?: %s" %raycast_dir_meio.is_colliding())
+		print("Raycast esq meio colidindo ?: %s" %raycast_esq_meio.is_colliding())
+
+		raycast_dir_alto_baixo.target_position.y = 0
+		raycast_esq_alto_baixo.target_position.y = 0
+		if parent.is_facing_right:
+			print("Indo para o climbing_right_fast")
+			request_transition("climbing_right_faster")
+		else:
+			print("Indo para o climbing_left_fast")
+			request_transition("climbing_left_faster")
+
+	elif ((raycast_dir_alto_baixo.enabled and raycast_dir_alto_baixo.is_colliding()) and (raycast_dir_alto.enabled and not raycast_dir_alto.is_colliding())) \
 	or (raycast_esq_alto_baixo.enabled and raycast_esq_alto_baixo.is_colliding() and raycast_esq_alto.enabled and not raycast_esq_alto.is_colliding()):
 		print("Raycast dir_alto_baixo colidindo ?: %s" %raycast_dir_alto_baixo.is_colliding())
 		print("Raycast dir_alto colidindo ?: %s" %raycast_dir_alto.is_colliding())

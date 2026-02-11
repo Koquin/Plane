@@ -10,8 +10,13 @@ func Enter() -> void:
 	super()
 	player.set_sprite("res://art/character/player_base_jumping_one_foot.png")
 	animator.play("jump/jumping_one_foot_right_from_left_foot")
-	parent.velocity.y = -170
 	
+	if (parent.is_on_floor()):
+		parent.velocity.y = -160
+	else:
+		parent.velocity.y = -130
+		parent.velocity.x = 130
+		
 func Physics_update(delta: float) -> void:
 	super(delta)
 	if (input.jump_just_pressed):

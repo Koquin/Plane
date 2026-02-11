@@ -89,6 +89,8 @@ func _physics_process(delta):
 	and not state_machine.is_in_state("looking_back_from_left")
 	and not state_machine.is_in_state("looking_back_from_right")
 	and not state_machine.is_in_state("climbing_right")
-	and not state_machine.is_in_state("climbing_left")):
+	and not state_machine.is_in_state("climbing_left")
+	and not state_machine.is_in_state("climbing_left_faster")
+	and not state_machine.is_in_state("climbing_right_faster")):
 		velocity.y += gravity * delta
 	move_and_slide()

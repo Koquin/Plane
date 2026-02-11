@@ -11,7 +11,7 @@ func Enter() -> void:
 	player.set_sprite("res://art/character/player_base_jumping_one_foot.png")
 	animator.play("jump/jumping_one_foot_right_from_right_foot")
 	if (parent.is_on_floor()):
-		parent.velocity.y = -170
+		parent.velocity.y = -160
 	else:
 		parent.velocity.y = -130
 		parent.velocity.x = 130

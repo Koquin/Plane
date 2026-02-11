@@ -1,21 +1,23 @@
 extends State
-class_name started_hangging_left
+class_name climbing_left_faster
 
 @onready var animator := $"../../Sprite2D/AnimationPlayer"
 @onready var input := $"../../PlayerInput"
 @onready var player := $"../../../Player"
 var cornerGrabPosition = Vector2.ZERO
 var ledgeGrabSnapPosition = Vector2.ZERO
+const ledgeClimbPositionY = -19
+var climbingLedgeFinalPosition = Vector2.ZERO
 const ledgeGrabSnapY = 2
 @onready var character_animation: AnimationPlayer = $"../../Sprite2D/AnimationPlayer"
-@onready var ray_cast_esq_alto: RayCast2D = $"../../RayCastsHang/RayCast2DEsquerdoAlto"
+@onready var ray_cast_esq_meio: RayCast2D = $"../../RayCastsHang/RayCast2DEsquerdoMeio"
 @onready var ray_cast_esq_alto_baixo: RayCast2D = $"../../RayCastsHang/RayCast2DEsquerdoAltoBaixo"
 
 func Enter() -> void:
 	super()
 	ledgeGrabSnapPosition = Vector2.ZERO
 		#Setting ray casts
-	ray_cast_esq_alto.enabled = not parent.is_facing_right
+	ray_cast_esq_meio.enabled = not parent.is_facing_right
 	ray_cast_esq_alto_baixo.enabled = not parent.is_facing_right
 	
 	#Which direction is the player facing
@@ -37,7 +39,7 @@ func Enter() -> void:
 	if (!parent.is_facing_right):
 		print("Entrou no parent is not facing right")
 		#Gets the coordinates of the collision point
-		_collisionPoint = ray_cast_esq_alto_baixo.get_collision_point()
+		_collisionPoint = ray_cast_esq_meio.get_collision_point()
 			
 		#Gets the local coordinates of the tile which the ray cast collided
 		local_point = parent.tileMap.to_local(_collisionPoint)
@@ -53,11 +55,13 @@ func Enter() -> void:
 	ledgeGrabSnapPosition = Vector2(cornerGrabPosition.x + (horizontal_direction * -1), cornerGrabPosition.y + ledgeGrabSnapY - 9)
 	
 	parent.global_position = ledgeGrabSnapPosition
-	player.set_sprite("res://art/character/player_base_started_hangging.png")
-	animator.play("hang/started_hangging_left")
 	parent.velocity = Vector2.ZERO
-	await animator.animation_finished
-	request_transition("hangging")
+	climbingLedgeFinalPosition = parent.global_position + Vector2(10 * horizontal_direction, ledgeClimbPositionY)
+	player.set_sprite("res://art/character/player_base_climbing.png")
+	animator.play("climbing/climbing_left_fast")
+	await get_tree().create_timer(0.2).timeout
+	parent.global_position = climbingLedgeFinalPosition
+	request_transition("idle_4")
 
 func Physics_update(delta: float) -> void:
 	super(delta)
