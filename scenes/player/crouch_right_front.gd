@@ -1,19 +1,22 @@
 extends State
-class_name recovering_from_sliding_left_back
+class_name crouch_right_front
 
 @onready var animator := $"../../Sprite2D/AnimationPlayer"
 @onready var input := $"../../PlayerInput"
 @onready var player := $"../../../Player"
-@onready var sprite := $"../../Sprite2D"
+@onready var in_left_step: bool
 
 func Enter() -> void:
 	super()
-	animator.play("recovering_from_sliding/recovering_from_sliding_left_back")
+	animator.play("crouch/crouch_right_front")
 	parent.velocity.x = 0
+	player.is_facing_right = true
+
 func Physics_update(delta: float) -> void:
 	super(delta)
-	if (input.down_pressed):
+	if !input.down_pressed:
+		request_transition("idle_2")
+	elif (input.move_axis == 1):
+		request_transition("crouch_walking_right_right_step")
+	elif (input.move_axis == -1):
 		request_transition("crouch_left_back")
-	elif (input.move_axis < 0):
-		request_transition("dashing_right_from_idle_4")
-	request_transition("idle_4")

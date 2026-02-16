@@ -24,3 +24,5 @@ func Physics_update(delta: float) -> void:
 		request_transition("turning_from_idle_2_to_idle_4")
 	elif input.jump_just_pressed and parent.is_on_floor():
 		request_transition("jumping_two_feet_right_from_idle")
+	elif input.down_pressed:
+		request_transition("crouch_right_front")
