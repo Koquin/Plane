@@ -14,5 +14,8 @@ func Enter() -> void:
 
 func Physics_update(delta: float) -> void:
 	super(delta)
-	await get_tree().create_timer(0.2).timeout
-	request_transition("idle_3")
+	if (input.move_axis < 0):
+		request_transition("running_left_left_step")
+	else:
+		await get_tree().create_timer(0.2).timeout
+		request_transition("idle_3")

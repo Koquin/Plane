@@ -13,5 +13,8 @@ func Enter() -> void:
 	parent.velocity.x = 0
 func Physics_update(delta: float) -> void:
 	super(delta)
-	await get_tree().create_timer(0.2).timeout
-	request_transition("idle_2")
+	if (input.move_axis > 0):
+		request_transition("running_right_right_step")
+	else:
+		await get_tree().create_timer(0.2).timeout
+		request_transition("idle_2")

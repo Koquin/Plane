@@ -12,7 +12,11 @@ func Enter() -> void:
 	animator.play("jump/jumping_one_foot_right_from_left_foot")
 	
 	if (parent.is_on_floor()):
-		parent.velocity.y = -160
+		if (parent.velocity.x < 100):
+			parent.velocity.y = -160
+			parent.velocity.x = 100
+		else:
+			parent.velocity.y = -160
 	else:
 		parent.velocity.y = -130
 		parent.velocity.x = 130

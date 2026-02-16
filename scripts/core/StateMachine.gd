@@ -12,6 +12,7 @@ func _ready():
 			states[child.name] = child
 			child.transitioned.connect(on_child_transitioned)
 			child.parent = get_parent()
+			print(child)
 		else:
 			push_warning("State machine contains child which is not 'State': %s" %child)
 
