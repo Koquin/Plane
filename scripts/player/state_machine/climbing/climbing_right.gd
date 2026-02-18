@@ -8,6 +8,7 @@ const ledgeClimbPositionY = -19
 @onready var facing_right = $"../../../Player".is_facing_right
 @onready var flip = $"../../Sprite2D".flip_h
 @onready var player := $"../../../Player"
+@export var apply_gravity := false
 
 func Enter():
 	super()

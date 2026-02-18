@@ -5,6 +5,7 @@ class_name running_left_left_step
 @onready var input := $"../../PlayerInput"
 @onready var player := $"../../../Player"
 @onready var in_left_step: bool
+@export var apply_gravity := true
 
 func Enter() -> void:
 	super()
@@ -30,6 +31,8 @@ func Physics_update(delta: float) -> void:
 		request_transition("jumping_one_foot_left_from_left_foot")
 	elif (input.down_pressed):
 		request_transition("sliding_left_from_left_step")
+	elif (input.bump_just_pressed):
+		request_transition("bump_left_from_left_step")
 	elif (input.move_axis == -1 and in_left_step):
 		await get_tree().create_timer(0.2).timeout
 		in_left_step = false

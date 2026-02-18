@@ -6,6 +6,7 @@ class_name idle_2
 @onready var facing_right = $"../../../Player".is_facing_right
 @onready var flip = $"../../Sprite2D".flip_h
 @onready var player := $"../../../Player"
+@export var apply_gravity := true
 
 func Enter():
 	parent.is_facing_right = true

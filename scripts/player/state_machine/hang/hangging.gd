@@ -5,6 +5,7 @@ var is_looking_back := false
 @onready var character_animation: AnimationPlayer = $"../../Sprite2D/AnimationPlayer"
 @onready var input := $"../../PlayerInput"
 @onready var player := $"../../../Player"
+@export var apply_gravity := false
 
 func Enter():
 	super()

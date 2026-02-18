@@ -8,6 +8,7 @@ class_name dashing_right_from_idle_4
 @onready var player := $"../../../Player"
 @onready var timer := 0
 @onready var until_next_move := 0.2
+@export var apply_gravity := true
 
 func Enter() -> void:
 	parent.is_facing_right = false

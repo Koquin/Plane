@@ -5,6 +5,7 @@ class_name idle_4
 @onready var input := $"../../PlayerInput"
 @onready var flip = $"../../Sprite2D".flip_h
 @onready var player := $"../../../Player"
+@export var apply_gravity := true
 
 func Enter():
 	parent.is_facing_right = false

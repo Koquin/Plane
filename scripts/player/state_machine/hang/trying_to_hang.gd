@@ -12,6 +12,7 @@ extends State
 @onready var raycast_esq_alto_baixo = player.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo")
 @onready var raycast_esq_meio = player.get_node("RayCastsHang/RayCast2DEsquerdoMeio")
 @onready var raycast_dir_meio = player.get_node("RayCastsHang/RayCast2DDireitoMeio")
+@export var apply_gravity := true
 
 func Enter():
 	super()

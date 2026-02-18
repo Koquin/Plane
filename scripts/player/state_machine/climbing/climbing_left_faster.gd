@@ -12,6 +12,7 @@ const ledgeGrabSnapY = 2
 @onready var character_animation: AnimationPlayer = $"../../Sprite2D/AnimationPlayer"
 @onready var ray_cast_esq_meio: RayCast2D = $"../../RayCastsHang/RayCast2DEsquerdoMeio"
 @onready var ray_cast_esq_alto_baixo: RayCast2D = $"../../RayCastsHang/RayCast2DEsquerdoAltoBaixo"
+@export var apply_gravity := false
 
 func Enter() -> void:
 	super()

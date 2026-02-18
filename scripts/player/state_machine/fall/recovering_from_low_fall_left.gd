@@ -5,6 +5,7 @@ class_name recovering_from_low_fall_left
 @onready var input := $"../../PlayerInput"
 @onready var player := $"../../../Player"
 @onready var sprite := $"../../Sprite2D"
+@export var apply_gravity := true
 
 func Enter() -> void:
 	super()

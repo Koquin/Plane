@@ -5,6 +5,7 @@ class_name crouch_walking_right_right_step
 @onready var input := $"../../PlayerInput"
 @onready var player := $"../../../Player"
 @onready var in_right_step: bool
+@export var apply_gravity := true
 
 func Enter() -> void:
 	super()

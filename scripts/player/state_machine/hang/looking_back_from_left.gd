@@ -6,6 +6,7 @@ class_name looking_back_from_left
 @onready var facing_right = $"../../../Player".is_facing_right
 @onready var flip = $"../../Sprite2D".flip_h
 @onready var player := $"../../../Player"
+@export var apply_gravity := false
 
 func Enter():
 	super()

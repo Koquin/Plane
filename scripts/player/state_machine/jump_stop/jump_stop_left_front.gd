@@ -6,6 +6,8 @@ class_name jump_stop_left_front
 @onready var player := $"../../../Player"
 @onready var in_left_step: bool
 @onready var maxJumpStopTime := 0.2
+@export var apply_gravity := true
+
 func Enter() -> void:
 	super()
 	player.set_sprite("res://art/character/player_base_jump_stopping.png")

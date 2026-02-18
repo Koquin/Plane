@@ -33,6 +33,10 @@ var jump_velocity : float = -100
 var gravity : float = 600
 var is_facing_right : bool = true
 var acceleration : float = 1
+var bump_power: float = 0.0
+
+var apply_gravity := true
+
 @onready var state_machine = $StateMachine
 var tileMap: TileMapLayer
 @onready var input = $PlayerInput
@@ -81,16 +85,12 @@ func set_tile_map(tm: TileMapLayer):
 	
 func _physics_process(delta):
 	input.update()
-	if (not state_machine.is_in_state("hangging") 
-	and not state_machine.is_in_state("climbing_ledge") 
-	and not state_machine.is_in_state("looking_back") 
-	and not state_machine.is_in_state("started_hangging_left") 
-	and not state_machine.is_in_state("started_hangging_right")
-	and not state_machine.is_in_state("looking_back_from_left")
-	and not state_machine.is_in_state("looking_back_from_right")
-	and not state_machine.is_in_state("climbing_right")
-	and not state_machine.is_in_state("climbing_left")
-	and not state_machine.is_in_state("climbing_left_faster")
-	and not state_machine.is_in_state("climbing_right_faster")):
+	if state_machine.current_state and state_machine.current_state.apply_gravity:
 		velocity.y += gravity * delta
 	move_and_slide()
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+
+		if bump_power > 0.0 and collider.has_method("receive_impact"):
+			collider.receive_impact(bump_power, self)

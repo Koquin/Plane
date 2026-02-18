@@ -5,6 +5,7 @@ class_name jumping_one_foot_right_from_left_foot
 @onready var input := $"../../PlayerInput"
 @onready var player := $"../../../Player"
 @onready var sprite := $"../../Sprite2D"
+@export var apply_gravity := true
 
 func Enter() -> void:
 	super()

@@ -7,6 +7,8 @@ var jump_just_pressed := false
 var up_pressed := false
 var down_pressed := false
 var down_just_pressed := false
+var bump_just_pressed := false
+
 func update():
 	move_axis = Input.get_axis("move_left", "move_right")
 	jump_just_pressed = Input.is_action_just_pressed("jump")
@@ -14,3 +16,4 @@ func update():
 	up_pressed = Input.is_action_pressed("move_up")
 	down_pressed = Input.is_action_pressed("move_down")
 	down_just_pressed = Input.is_action_just_pressed("move_down")
+	bump_just_pressed = Input.is_action_just_pressed("bump")

@@ -3,6 +3,7 @@ class_name turning_from_idle_2_to_4
 
 @onready var animator : AnimationPlayer = $"../../Sprite2D/AnimationPlayer"
 @onready var player := $"../../../Player"
+@export var apply_gravity := true
 
 func Enter():
 	parent.is_facing_right = true
