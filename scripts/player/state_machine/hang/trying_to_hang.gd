@@ -2,32 +2,25 @@ class_name trying_to_hang_left
 extends State
 
 @onready var animator : AnimationPlayer = $"../../Sprite2D/AnimationPlayer"
-@onready var input := $"../../PlayerInput"
-@onready var facing_right = $"../../../Player".is_facing_right
+var facing_right
 @onready var flip = $"../../Sprite2D".flip_h
-@onready var player := $"../../../Player"
-@onready var raycast_dir_alto = player.get_node("RayCastsHang/RayCast2DDireitoAlto")
-@onready var raycast_esq_alto = player.get_node("RayCastsHang/RayCast2DEsquerdoAlto")
-@onready var raycast_dir_alto_baixo = player.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo")
-@onready var raycast_esq_alto_baixo = player.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo")
-@onready var raycast_esq_meio = player.get_node("RayCastsHang/RayCast2DEsquerdoMeio")
-@onready var raycast_dir_meio = player.get_node("RayCastsHang/RayCast2DDireitoMeio")
+@onready var player := character
 @export var apply_gravity := true
 
 func Enter():
 	super()
-	player.set_sprite("res://art/character/player_base_trying_to_hang.png")
-	if (parent.is_facing_right):
+	facing_right = character.is_facing_right
+	if (character.is_facing_right):
 		animator.play("hang/trying_to_hang_right")
 	else: animator.play("hang/trying_to_hang_left")
-	parent.get_node("RayCastsHang/RayCast2DDireitoAlto").enabled = parent.is_facing_right
-	parent.get_node("RayCastsHang/RayCast2DEsquerdoAlto").enabled = not parent.is_facing_right
-	parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled = parent.is_facing_right
-	parent.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo").enabled = not parent.is_facing_right
-	parent.get_node("RayCastsHang/RayCast2DDireitoMeio").enabled = parent.is_facing_right
-	parent.get_node("RayCastsHang/RayCast2DEsquerdoMeio").enabled = not parent.is_facing_right
-	print("Raycast direito alto: %s" %parent.get_node("RayCastsHang/RayCast2DDireitoAlto").enabled)
-	print("Raycast direito baixo: %s" %parent.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled)
+	character.get_node("RayCastsHang/RayCast2DDireitoAlto").enabled = character.is_facing_right
+	character.get_node("RayCastsHang/RayCast2DEsquerdoAlto").enabled = not character.is_facing_right
+	character.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled = character.is_facing_right
+	character.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo").enabled = not character.is_facing_right
+	character.get_node("RayCastsHang/RayCast2DDireitoMeio").enabled = character.is_facing_right
+	character.get_node("RayCastsHang/RayCast2DEsquerdoMeio").enabled = not character.is_facing_right
+	print("Raycast direito alto: %s" %character.get_node("RayCastsHang/RayCast2DDireitoAlto").enabled)
+	print("Raycast direito baixo: %s" %character.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo").enabled)
 
 func Physics_update(delta: float) -> void:
 	super(delta)
@@ -38,7 +31,7 @@ func Physics_update(delta: float) -> void:
 
 		raycast_dir_alto_baixo.target_position.y = 0
 		raycast_esq_alto_baixo.target_position.y = 0
-		if parent.is_facing_right:
+		if character.is_facing_right:
 			print("Indo para o climbing_right_fast")
 			request_transition("climbing_right_faster")
 		else:
@@ -54,23 +47,23 @@ func Physics_update(delta: float) -> void:
 
 		raycast_dir_alto_baixo.target_position.y = 0
 		raycast_esq_alto_baixo.target_position.y = 0
-		if parent.is_facing_right:
+		if character.is_facing_right:
 			print("Indo para o hangging right")
 			request_transition("started_hangging_right")
 		else:
 			print("Indo para o hangging left")
 			request_transition("started_hangging_left")
 
-	elif parent.is_on_floor():
+	elif character.is_on_floor():
 		print("Recuperando da queda")
-		if parent.is_facing_right:
+		if character.is_facing_right:
 			request_transition("recovering_from_low_fall_right")
 		else:
 			request_transition("recovering_from_low_fall_left")
 	
-	elif parent.velocity.y > 100:
-		raycast_dir_alto_baixo.target_position.y = max(0, abs(parent.velocity.y) * delta * 2)
-		raycast_esq_alto_baixo.target_position.y = max(0, abs(parent.velocity.y) * delta * 2)
+	elif character.velocity.y > 100:
+		raycast_dir_alto_baixo.target_position.y = max(0, abs(character.velocity.y) * delta * 2)
+		raycast_esq_alto_baixo.target_position.y = max(0, abs(character.velocity.y) * delta * 2)
 
 func Exit():
 	raycast_dir_alto_baixo.target_position.y = 0

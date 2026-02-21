@@ -2,8 +2,8 @@ extends State
 class_name crouch_walking_right_right_step
 
 @onready var animator := $"../../Sprite2D/AnimationPlayer"
-@onready var input := $"../../PlayerInput"
-@onready var player := $"../../../Player"
+
+@onready var player := character
 @onready var in_right_step: bool
 @export var apply_gravity := true
 
@@ -11,17 +11,17 @@ func Enter() -> void:
 	super()
 	in_right_step = true
 	animator.play("crouch_walking/crouch_walking_right_right_step")
-	parent.velocity.x = 30
+	character.velocity.x = 30
 
 func Physics_update(delta: float) -> void:
 	super(delta)
-	if parent.velocity.y > 0:
+	if character.velocity.y > 0:
 		request_transition("low_falling_left")
-	elif !input.down_pressed:
+	elif !character.input.down_pressed:
 		request_transition("idle_1")
-	elif (input.move_axis == 0):
+	elif (character.input.move_axis == 0):
 		request_transition("crouch_right_back")
-	elif (input.move_axis == 1 and in_right_step):
+	elif (character.input.move_axis == 1 and in_right_step):
 		await get_tree().create_timer(0.4).timeout
 		in_right_step = false
 		request_transition("crouch_walking_right_left_step")

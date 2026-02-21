@@ -7,8 +7,22 @@ signal transitioned(new_state_name: StringName)
 
 var time_in_state := 0.0
 var can_request_transition := true
-var parent: CharacterBody2D
+var character : Base_Character
+var raycast_dir_alto
+var raycast_esq_alto
+var raycast_dir_alto_baixo
+var raycast_esq_alto_baixo
+var raycast_esq_meio
+var raycast_dir_meio
 
+func initialize():
+	raycast_dir_alto = character.get_node("RayCastsHang/RayCast2DDireitoAlto")
+	raycast_esq_alto = character.get_node("RayCastsHang/RayCast2DEsquerdoAlto")
+	raycast_dir_alto_baixo = character.get_node("RayCastsHang/RayCast2DDireitoAltoBaixo")
+	raycast_esq_alto_baixo = character.get_node("RayCastsHang/RayCast2DEsquerdoAltoBaixo")
+	raycast_esq_meio = character.get_node("RayCastsHang/RayCast2DEsquerdoMeio")
+	raycast_dir_meio = character.get_node("RayCastsHang/RayCast2DDireitoMeio")
+	
 func Enter():
 	time_in_state = 0.0
 	can_request_transition = true

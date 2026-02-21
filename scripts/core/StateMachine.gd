@@ -5,13 +5,18 @@ extends Node
 var states: Dictionary = {}
 var transition_requested := false
 var next_state_name: StringName
+var character
 
 func _ready():
+	character = get_parent()
+	for child in get_children():
+		child.character = character
+		child.initialize()
 	for child in get_children():
 		if child is State:
 			states[child.name] = child
 			child.transitioned.connect(on_child_transitioned)
-			child.parent = get_parent()
+			child.character = get_parent()
 			print(child)
 		else:
 			push_warning("State machine contains child which is not 'State': %s" %child)

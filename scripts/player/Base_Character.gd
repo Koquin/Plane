@@ -1,4 +1,4 @@
-class_name Player
+class_name Base_Character
 extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -39,7 +39,7 @@ var apply_gravity := true
 
 @onready var state_machine = $StateMachine
 var tileMap: TileMapLayer
-@onready var input = $PlayerInput
+@onready var input: InputProvider
 
 func add_arm_damage(amount: int):
 	damaged_arms += amount
@@ -63,12 +63,13 @@ func add_leg_damage(amount: int):
 		2:
 			can_run = false
 			can_stand = false
-	
+
 func add_body_damage(amount: int):
 	damaged_body += amount
 	damaged_body = clamp(damaged_body, 0, 4)
 	#if damaged_body >= 4:
 		#trigger_body_death() # suicídio / falha do corpo
+
 func add_head_damage():
 	#if damaged_head:
 	#	trigger_game_over() # segundo tiro
@@ -77,14 +78,20 @@ func add_head_damage():
 	#	apply_head_effects() # náusea, blur, etc
 
 func _ready():
+	setup_input()
+	assert(input != null, "InputProvider não foi definido!")
 	# Inicia o personagem no Idle
 	state_machine.on_child_transitioned("idle_1")
 
+func setup_input():
+	pass
+	
 func set_tile_map(tm: TileMapLayer):
 	tileMap = tm
-	
+
 func _physics_process(delta):
-	input.update()
+	if input:
+		input.update(delta)
 	if state_machine.current_state and state_machine.current_state.apply_gravity:
 		velocity.y += gravity * delta
 	move_and_slide()

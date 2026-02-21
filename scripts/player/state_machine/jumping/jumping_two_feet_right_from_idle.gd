@@ -2,21 +2,20 @@ extends State
 class_name jumping_two_feet_right_from_idle
 
 @onready var animator := $"../../Sprite2D/AnimationPlayer"
-@onready var input := $"../../PlayerInput"
-@onready var player := $"../../../Player"
+
+@onready var player := character
 @onready var sprite := $"../../Sprite2D"
 @export var apply_gravity := true
 
 func Enter() -> void:
 	super()
-	player.set_sprite("res://art/character/player_base_jumping_two_feet.png")
 	animator.play("jump/jumping_two_feet_right")
-	parent.velocity.y = -190
+	character.velocity.y = -190
 
 func Physics_update(delta: float) -> void:
 	super(delta)
-	if (input.jump_just_pressed):
+	if (character.input.jump_just_pressed):
 		request_transition("trying_to_hang")
 		return
-	elif (parent.velocity.y > 0):
+	elif (character.velocity.y > 0):
 		request_transition("low_falling_right")
