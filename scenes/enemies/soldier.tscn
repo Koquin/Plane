@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://j5x4kxry32wm"]
+
+[ext_resource type="PackedScene" uid="uid://bwkg4xy2sxpng" path="res://scenes/base_character.tscn" id="1_hefb6"]
+[ext_resource type="Script" uid="uid://bc1bsutaoh5gc" path="res://scenes/enemies/soldier.gd" id="2_qkiq7"]
+
+[node name="Base_Character" unique_id=1842744511 instance=ExtResource("1_hefb6")]
+script = ExtResource("2_qkiq7")
+
+[node name="Raycast_Jump" type="Node2D" parent="." index="4" unique_id=635650202]
+
+[node name="Raycast_jump_one_feet_left_lower" type="RayCast2D" parent="Raycast_Jump" index="0" unique_id=1567090891]
+position = Vector2(0, 4)
+scale = Vector2(1, 0.2)
+target_position = Vector2(-30, 0)
+
+[node name="Raycast_jump_one_feet_left_middle" type="RayCast2D" parent="Raycast_Jump" index="1" unique_id=910731182]
+position = Vector2(0, -1)
+scale = Vector2(1, 0.2)
+target_position = Vector2(-30, 0)
+
+[node name="Raycast_jump_one_feet_left_top" type="RayCast2D" parent="Raycast_Jump" index="2" unique_id=771930771]
+position = Vector2(0, -30)
+scale = Vector2(1, 0.2)
+target_position = Vector2(-40, 0)
+
+[node name="Raycast_jump_one_feet_left_bottom" type="RayCast2D" parent="Raycast_Jump" index="3" unique_id=1812112299]
+position = Vector2(0, 10)
+scale = Vector2(1, 0.2)
+target_position = Vector2(-5, 0)

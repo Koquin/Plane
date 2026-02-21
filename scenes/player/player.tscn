@@ -3,5 +3,29 @@
 [ext_resource type="PackedScene" uid="uid://bwkg4xy2sxpng" path="res://scenes/base_character.tscn" id="1_8afob"]
 [ext_resource type="Script" uid="uid://b38ee6xssnt1i" path="res://scenes/player/player.gd" id="2_dovo2"]
 
+[sub_resource type="GDScript" id="GDScript_dovo2"]
+script/source = "extends Camera2D
+
+@onready var character: CharacterBody2D = get_parent()
+
+func _ready() -> void:
+	pass	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if (character.is_facing_right):
+		position.x = 55
+	else:
+		position.x = -55
+"
+
 [node name="Base_Character" unique_id=1842744511 instance=ExtResource("1_8afob")]
 script = ExtResource("2_dovo2")
+
+[node name="Camera2D2" type="Camera2D" parent="." index="4" unique_id=639136289]
+position = Vector2(120, 0)
+scale = Vector2(0.114974044, 0.41060677)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+rotation_smoothing_enabled = true
+script = SubResource("GDScript_dovo2")

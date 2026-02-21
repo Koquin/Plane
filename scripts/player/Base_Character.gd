@@ -78,11 +78,12 @@ func add_head_damage():
 	#	apply_head_effects() # náusea, blur, etc
 
 func _ready():
+	add_to_group("characters")
 	setup_input()
 	assert(input != null, "InputProvider não foi definido!")
 	# Inicia o personagem no Idle
 	state_machine.on_child_transitioned("idle_1")
-
+	
 func setup_input():
 	pass
 	

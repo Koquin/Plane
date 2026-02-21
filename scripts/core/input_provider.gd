@@ -7,6 +7,5 @@ var up_pressed := false
 var down_pressed := false
 var down_just_pressed := false
 var bump_just_pressed := false
-
 func update(delta):
 	pass

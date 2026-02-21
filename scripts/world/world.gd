@@ -3,4 +3,5 @@ extends Node2D
 @onready var tileMap: TileMapLayer = $TileMapLayer
 
 func _ready():
-	$Base_Character.set_tile_map(tileMap)
+	for character in get_tree().get_nodes_in_group("characters"):
+		character.set_tile_map(tileMap)

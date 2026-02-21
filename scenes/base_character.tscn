@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bwkg4xy2sxpng"]
 
 [ext_resource type="Script" uid="uid://bfjj4j7xo0utd" path="res://scripts/player/Base_Character.gd" id="1_yrm1y"]
-[ext_resource type="Script" uid="uid://demne7pukhv2c" path="res://scenes/player/camera2d.gd" id="2_mfwrq"]
 [ext_resource type="Texture2D" uid="uid://5xcaosh8boa2" path="res://art/character/player_base_idle.png" id="3_l6lgu"]
 [ext_resource type="Texture2D" uid="uid://45l7vngun2hk" path="res://art/character/player_base_bump.png" id="4_cfkix"]
 [ext_resource type="Texture2D" uid="uid://dv6c7qw58pq8w" path="res://art/character/player_base_climbing.png" id="5_xtlmo"]
@@ -5349,15 +5348,6 @@ _data = {
 [node name="Base_Character" type="CharacterBody2D" unique_id=1842744511]
 script = ExtResource("1_yrm1y")
 metadata/_custom_type_script = "uid://bfjj4j7xo0utd"
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=755834062]
-position = Vector2(120, 0)
-scale = Vector2(0.114974044, 0.41060677)
-zoom = Vector2(4, 4)
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-rotation_smoothing_enabled = true
-script = ExtResource("2_mfwrq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=391637048]
 position = Vector2(0, 1)
