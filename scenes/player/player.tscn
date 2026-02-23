@@ -19,6 +19,7 @@ func _process(delta: float) -> void:
 "
 
 [node name="Base_Character" unique_id=1842744511 instance=ExtResource("1_8afob")]
+collision_layer = 2
 script = ExtResource("2_dovo2")
 
 [node name="Camera2D2" type="Camera2D" parent="." index="4" unique_id=639136289]

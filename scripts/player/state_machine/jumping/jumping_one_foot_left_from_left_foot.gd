@@ -21,6 +21,7 @@ func Enter() -> void:
 		character.velocity.x = -130
 		
 func Physics_update(delta: float) -> void:
+	
 	super(delta)
 	if (character.input.jump_just_pressed):
 		request_transition("trying_to_hang")
