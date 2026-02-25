@@ -35,6 +35,8 @@ var is_facing_right : bool = true
 var acceleration : float = 1
 var bump_power: float = 0.0
 
+@onready var ray_cast_crouch := $Raycasts_crouch/Raycast_need_crouch
+
 var apply_gravity := true
 
 @onready var state_machine = $StateMachine

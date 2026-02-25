@@ -15,7 +15,7 @@ scale = Vector2(1, 0.2)
 target_position = Vector2(-30, 0)
 
 [node name="Raycast_jump_one_feet_left_middle" type="RayCast2D" parent="Raycasts_Jump" index="1" unique_id=910731182]
-position = Vector2(0, -1)
+position = Vector2(0, -3)
 scale = Vector2(1, 0.2)
 target_position = Vector2(-30, 0)
 

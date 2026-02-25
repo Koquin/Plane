@@ -5608,3 +5608,9 @@ script = ExtResource("72_tbqmi")
 
 [node name="bump_right_from_right_step" type="Node" parent="StateMachine" unique_id=1723297980]
 script = ExtResource("73_s6ca2")
+
+[node name="Raycasts_crouch" type="Node2D" parent="." unique_id=835789191]
+
+[node name="Raycast_need_crouch" type="RayCast2D" parent="Raycasts_crouch" unique_id=1264448981]
+scale = Vector2(5, 0.7)
+target_position = Vector2(0, -11)

@@ -6,6 +6,7 @@ class_name sliding_right_from_right_step
 @onready var player := character
 @onready var sprite := $"../../Sprite2D"
 @export var apply_gravity := true
+@onready var ray_cast_crouch := $"../../Raycasts_crouch/Raycast_need_crouch"
 
 func Enter() -> void:
 	super()

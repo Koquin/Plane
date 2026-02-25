@@ -10,10 +10,10 @@ var facing_right
 
 func Enter():
 	super()
+	
 	facing_right = character.is_facing_right
 	animator.play("hang/looking_back_from_left")
 	flip = not facing_right
-
 func Physics_update(delta: float) -> void:
 	super(delta)
 	if not character.input.move_axis:

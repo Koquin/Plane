@@ -4,6 +4,7 @@ class_name crouch_left_front
 @onready var animator := $"../../Sprite2D/AnimationPlayer"
 @onready var in_left_step: bool
 @export var apply_gravity := true
+@onready var ray_cast_crouch := $"../../Raycasts_crouch/Raycast_need_crouch"
 
 func Enter() -> void:
 	super()
@@ -13,7 +14,7 @@ func Enter() -> void:
 
 func Physics_update(delta: float) -> void:
 	super(delta)
-	if !character.input.down_pressed:
+	if !character.input.down_pressed and !ray_cast_crouch.is_colliding():
 		request_transition("idle_3")
 	elif (character.input.move_axis == -1):
 		request_transition("crouch_walking_left_left_step")

@@ -28,7 +28,7 @@ func Physics_update(delta: float) -> void:
 		request_transition("jumping_one_foot_left_from_right_foot")
 	elif (character.input.move_axis != -1):
 		request_transition("jump_stop_left_back")
-	elif (character.input.down_pressed):
+	elif (character.input.down_just_pressed or character.input.down_pressed):
 		request_transition("sliding_left_from_right_step")
 	elif (character.input.bump_just_pressed):
 		request_transition("bump_left_from_right_step")

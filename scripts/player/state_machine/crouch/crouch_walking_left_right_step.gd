@@ -6,6 +6,7 @@ class_name crouch_walking_left_right_step
 @onready var player := character
 @onready var in_left_step: bool
 @export var apply_gravity := true
+@onready var ray_cast_crouch := $"../../Raycasts_crouch/Raycast_need_crouch"
 
 func Enter() -> void:
 	super()
@@ -17,7 +18,7 @@ func Physics_update(delta: float) -> void:
 	super(delta)
 	if character.velocity.y > 0:
 		request_transition("low_falling_left")
-	elif !character.input.down_pressed:
+	elif !character.input.down_pressed and !ray_cast_crouch.is_colliding():
 		request_transition("idle_3")
 	elif (character.input.move_axis == 0):
 		request_transition("crouch_left_front")
