@@ -28,6 +28,8 @@ var can_hang: bool = true
 var can_stand: bool = true
 var can_suicide: bool = true
 
+var is_hangging: bool = false
+
 var speed : float = 3.5
 var jump_velocity : float = -100
 var gravity : float = 600
@@ -42,6 +44,7 @@ var apply_gravity := true
 @onready var state_machine = $StateMachine
 var tileMap: TileMapLayer
 @onready var input: InputProvider
+
 
 func add_arm_damage(amount: int):
 	damaged_arms += amount
@@ -95,6 +98,7 @@ func set_tile_map(tm: TileMapLayer):
 func _physics_process(delta):
 	if input:
 		input.update(delta)
+	else: print("nao tem input")
 	if state_machine.current_state and state_machine.current_state.apply_gravity:
 		velocity.y += gravity * delta
 	move_and_slide()

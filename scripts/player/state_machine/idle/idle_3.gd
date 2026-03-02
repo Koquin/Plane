@@ -18,7 +18,7 @@ func Enter():
 func Physics_update(delta: float) -> void:
 	if (not character.is_facing_right and character.input.move_axis == -1):
 		request_transition("dashing_left_from_idle_3")
-	elif (!character.is_facing_right and character.input.move_axis == 1):
+	elif (!character.is_facing_right and character.input.move_axis == 1 or character.input.must_turn):
 		print("Tava virado para a esquerda e apertou o axis de valor 1")
 		character.is_facing_right = true
 		request_transition("turning_from_idle_3_to_idle_2")

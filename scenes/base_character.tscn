@@ -5360,12 +5360,12 @@ scale = Vector2(0.0237143, 0.301438)
 [node name="RayCast2DDireitoAlto" type="RayCast2D" parent="RayCastsHang" unique_id=1341551002]
 position = Vector2(0, -35)
 scale = Vector2(1.4, 1)
-target_position = Vector2(220, 0)
+target_position = Vector2(250, 0)
 
 [node name="RayCast2DEsquerdoAlto" type="RayCast2D" parent="RayCastsHang" unique_id=2124164748]
 position = Vector2(0, -35)
 scale = Vector2(1.4, 1)
-target_position = Vector2(-220, 0)
+target_position = Vector2(-250, 0)
 
 [node name="RayCast2DDireitoAltoBaixo" type="RayCast2D" parent="RayCastsHang" unique_id=165039668]
 position = Vector2(0, -20)

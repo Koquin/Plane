@@ -16,7 +16,7 @@ func Enter():
 func Physics_update(delta: float) -> void:
 	if (not character.is_facing_right and character.input.move_axis == -1):
 		request_transition("dashing_left_from_idle_4")
-	elif(!character.is_facing_right and character.input.move_axis == 1):
+	elif(!character.is_facing_right and character.input.move_axis == 1 or character.input.must_turn):
 		character.is_facing_right = true
 		request_transition("turning_from_idle_4_to_idle_1")
 	elif character.input.jump_just_pressed and character.is_on_floor():

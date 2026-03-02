@@ -9,7 +9,8 @@ var is_looking_back := false
 
 func Enter():
 	super()
-
+	
+	character.is_hangging = true
 	#Hangging animation
 	if (character.is_facing_right):
 		print("Parent facing right ? %s" %character.is_facing_right)
@@ -23,15 +24,19 @@ func Physics_update(delta: float) -> void:
 	if character.input.up_pressed:
 		if character.is_facing_right:
 			request_transition("climbing_right")
+			character.is_hangging = false
 			return
 		else: 
+			character.is_hangging = false
 			request_transition("climbing_left")
 			return
 	elif character.input.down_pressed and character.is_facing_right:
+		character.is_hangging = false
 		print("Caindo para a direita")
 		request_transition("low_falling_right")
 		return
 	elif character.input.down_pressed and not character.is_facing_right: 
+		character.is_hangging = false
 		print("Caindo para a esquerda")
 		request_transition("low_falling_left")
 		return

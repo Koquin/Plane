@@ -18,6 +18,10 @@ config/name="Plane"
 run/main_scene="uid://bjxwuccvmomoq"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[autoload]
+
+TrailManager="*uid://dvq3v0u4luwxk"
+
 [dotnet]
 
 project/assembly_name="Plane"

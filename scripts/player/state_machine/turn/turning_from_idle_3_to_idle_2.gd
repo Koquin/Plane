@@ -6,7 +6,6 @@ class_name turning_from_idle_3_to_2
 @export var apply_gravity := true
 
 func Enter():
-	character.is_facing_right = false
 	super()
 	animator.play("turn/turn_3_to_2")
 func Physics_update(delta: float) -> void:

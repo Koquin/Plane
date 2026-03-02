@@ -9,22 +9,31 @@ script = ExtResource("2_qkiq7")
 
 [node name="Raycasts_Jump" type="Node2D" parent="." index="4" unique_id=635650202]
 
-[node name="Raycast_jump_one_feet_left_lower" type="RayCast2D" parent="Raycasts_Jump" index="0" unique_id=1567090891]
+[node name="Raycast_jump_one_foot_lower" type="RayCast2D" parent="Raycasts_Jump" index="0" unique_id=1567090891]
 position = Vector2(0, 4)
 scale = Vector2(1, 0.2)
 target_position = Vector2(-30, 0)
 
-[node name="Raycast_jump_one_feet_left_middle" type="RayCast2D" parent="Raycasts_Jump" index="1" unique_id=910731182]
+[node name="Raycast_jump_two_feet_top" type="RayCast2D" parent="Raycasts_Jump" index="1" unique_id=1995715613]
+position = Vector2(0, -50)
+scale = Vector2(1, 0.2)
+target_position = Vector2(-15, 0)
+
+[node name="Raycast_jump_one_foot_middle" type="RayCast2D" parent="Raycasts_Jump" index="2" unique_id=910731182]
 position = Vector2(0, -3)
 scale = Vector2(1, 0.2)
 target_position = Vector2(-30, 0)
 
-[node name="Raycast_jump_one_feet_left_top" type="RayCast2D" parent="Raycasts_Jump" index="2" unique_id=771930771]
+[node name="Raycast_jump_one_foot_top" type="RayCast2D" parent="Raycasts_Jump" index="3" unique_id=771930771]
 position = Vector2(0, -30)
 scale = Vector2(1, 0.2)
 target_position = Vector2(-40, 0)
 
-[node name="Raycast_jump_one_feet_left_bottom" type="RayCast2D" parent="Raycasts_Jump" index="3" unique_id=1812112299]
-position = Vector2(0, 10)
+[node name="Raycast_jump_one_foot_bottom" type="RayCast2D" parent="Raycasts_Jump" index="4" unique_id=1812112299]
+position = Vector2(0, 8)
+target_position = Vector2(-14, 2)
+
+[node name="Raycast_jump_two_feet_top_bottom" type="RayCast2D" parent="Raycasts_Jump" index="5" unique_id=662743822]
+position = Vector2(0, -30)
 scale = Vector2(1, 0.2)
 target_position = Vector2(-5, 0)
